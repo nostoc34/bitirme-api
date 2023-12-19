@@ -1,9 +1,9 @@
-Muhammed Selim YAMAN
-Konya Teknik Üniversitesi
-Bitirme Projesi (Nostopia) API
+Muhammed Selim YAMAN <br/>
+Konya Teknik Üniversitesi<br/>
+Bitirme Projesi (Nostopia) API<br/>
 
 
-Node.js
-Express.js
-GraphQL
+Node.js <br/>
+Express.js<br/>
+GraphQL<br/>
 RethinkDB
