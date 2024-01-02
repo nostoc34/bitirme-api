@@ -34,6 +34,11 @@ export default `
         changeEmail(
             email: String!,
             password: String!
+        ): Default,
+        changePassword(
+            oldPassword: String!,
+            newPassword: String!,
+            newPasswordRe: String!
         ): Default
     }
 `;

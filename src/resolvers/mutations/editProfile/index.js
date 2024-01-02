@@ -22,7 +22,7 @@ const editProfile = async (obj, args, context) => {
                 userName: args.userName
             })
             .run();
-
+            
         if(isUserNameExist && isUserNameExist.length) {
             return {
                 message: "Bu kullanıcı zaten kullanımda.",
@@ -67,6 +67,7 @@ const editProfile = async (obj, args, context) => {
                     data: editedProfile
                 };
             }).catch((e) => {
+                error_log(e.message, 503);
                 return {
                     message: "Kullanıcı güncellenemedi.",
                     code: 503

@@ -6,7 +6,7 @@ import {
     SERVER_URL
 } from '../../../constants';
 
-const changeEmail = async (obj, args, context) => {
+const changePassword = async (obj, args, context) => {
     const {
         userID
     } = context;
@@ -17,45 +17,35 @@ const changeEmail = async (obj, args, context) => {
         .get(userID)
         .run();
 
-    if(user.password !== args.password) return {
-        message: "Hatalı şifre.",
+    if(user.password !== args.oldPassword) return {
+        message: "Eski şifre hatalı.",
         code: 503
     };
 
-    const isEmailExists = await r
-        .db(DB)
-        .table("users")
-        .filter({
-            email: args.email
-        })
-        .run();
-
-    if(isEmailExists && isEmailExists.length) return {
-        message: "Bu email zaten kullanımda.",
+    if(args.newPassword !== args.newPasswordRe) return {
+        message: "Yeni şifreler uyuşmuyor.",
         code: 503
     };
-
-
 
     return await r
         .db(DB)
         .table("users")
         .get(userID)
         .update({
-            email: args.email
+            password: args.newPassword
         })
         .then(() => {
             return {
-                message: "Email başarıyla değiştirildi.",
+                message: "Şifre değiştirildi.",
                 code: 200
             };
         }) .catch((e) => {
             error_log(e.message, 503);
             return {
-                message: "Email güncellenemedi.",
+                message: "Şifre güncellenemedi.",
                 code: 503
             };
         });
 };
 
-export default changeEmail;
+export default changePassword;
