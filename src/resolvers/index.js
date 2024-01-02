@@ -10,6 +10,9 @@ import editProfile from "./mutations/editProfile";
 import changeEmail from "./mutations/changeEmail";
 import changePassword from "./mutations/changePassword";
 
+//Queries
+import getComments from "./queries/getComments";
+
 const resolvers = {
     Mutation: {
         newPost,
@@ -24,6 +27,7 @@ const resolvers = {
         changePassword
     },
     Query: {
+        getComments
     }
 };
 export default resolvers;

@@ -1,5 +1,7 @@
 export default `
     type Query {
-        deneme: Default
+        getComments(
+            postID: String!
+        ): GetCommentsRes
     }
 `;
