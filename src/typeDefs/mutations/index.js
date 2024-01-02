@@ -30,6 +30,10 @@ export default `
             about: String,
             isPrivate: Boolean,
             profilePhoto: Upload
-        ): UserResponse
+        ): UserResponse,
+        changeEmail(
+            email: String!,
+            password: String!
+        ): Default
     }
 `;
