@@ -19,6 +19,10 @@ export default `
         ): Default,
         handleFollow(
             toUser: String!
-        ): FollowResponse
+        ): FollowResponse,
+        handleFollowRequest(
+            followID: String!,
+            reqResponse: String!
+        ): Default
     }
 `;

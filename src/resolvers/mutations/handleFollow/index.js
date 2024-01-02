@@ -57,7 +57,12 @@ const handleFollow = async (obj, args, context) => {
             toUser: args.toUser,
             createdAt: new Date().toISOString(),
         };
-    
+        if(toUser.isPrivate) {
+            newFollow.status = "waiting";
+        } else {
+            newFollow.status = "approved";
+        }
+        
         return await r
             .db(DB)
             .table("followings")

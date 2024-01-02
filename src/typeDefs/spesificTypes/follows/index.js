@@ -3,6 +3,7 @@ const Follow = `
         id: String,
         fromUser: String,
         toUser: String,
+        status: String,
         createdAt: String,
     },
     type FollowResponse {
