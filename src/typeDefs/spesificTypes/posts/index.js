@@ -12,5 +12,10 @@ const Post = `
         code: Int,
         data: Post
     },
+    type GetOwnPostsRes {
+        message: String,
+        code: Int,
+        data: [Post]
+    }
 `;
 export default Post;

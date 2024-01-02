@@ -12,6 +12,7 @@ import changePassword from "./mutations/changePassword";
 
 //Queries
 import getComments from "./queries/getComments";
+import getOwnPosts from "./queries/getOwnPosts";
 
 const resolvers = {
     Mutation: {
@@ -27,7 +28,8 @@ const resolvers = {
         changePassword
     },
     Query: {
-        getComments
+        getComments,
+        getOwnPosts
     }
 };
 export default resolvers;
