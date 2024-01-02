@@ -11,7 +11,6 @@ import changeEmail from "./mutations/changeEmail";
 import changePassword from "./mutations/changePassword";
 
 //Queries
-import getComments from "./queries/getComments";
 import getOwnPosts from "./queries/getOwnPosts";
 import getLikes from "./queries/getLikes";
 import getLikesCount from "./queries/getLikesCount";
@@ -33,7 +32,6 @@ const resolvers = {
         changePassword
     },
     Query: {
-        getComments,
         getOwnPosts,
         getLikes,
         getLikesCount,

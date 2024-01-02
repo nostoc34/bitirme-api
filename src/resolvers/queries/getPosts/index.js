@@ -47,10 +47,34 @@ const getPosts = async (obj, args, context) => {
                 .get(item.userID)
                 .run();
             item.userName = userData.userName;
-            item.userProfilePhoto = userData.profilePhoto;
+            item.profilePhoto = userData.profilePhoto;
             _posts.push(item);            
         });
         
+    });
+
+    await asyncForEach(_posts, async (item, index) => {
+        const comments = await r
+            .db(DB)
+            .table("comments")
+            .filter({
+                postID: item.id,
+                isDeleted: false
+            })
+            .run();
+        item.comments = comments;
+    });
+
+    await asyncForEach(_posts, async (item, index) => {
+        const likes = await r
+            .db(DB)
+            .table("likes")
+            .filter({
+                postID: item.id,
+            })
+            .count()
+            .run();
+        item.likes = likes;
     });
 
     return {

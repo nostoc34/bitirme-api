@@ -7,6 +7,16 @@ const Post = `
         isDeleted: Boolean,
         createdAt: String,
     },
+    type Comment {
+        id: String,
+        userID: String,
+        postID: String,
+        comment: String,
+        isDeleted: Boolean,
+        createdAt: String,
+        userName: String,
+        profilePhoto: String
+    },
     type GetPost {
         id: String,
         userID: String,
@@ -15,7 +25,9 @@ const Post = `
         isDeleted: Boolean,
         createdAt: String,
         userName: String,
-        userProfilePhoto: String
+        profilePhoto: String,
+        comments: [Comment],
+        likes: Int
     },
     type PostResponse {
         message: String,

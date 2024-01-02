@@ -11,6 +11,12 @@ const newComment = async (obj, args, context) => {
         userID
     } = context;
 
+    const user = await r
+        .db(DB)
+        .table("users")
+        .get(userID)
+        .run();
+
     const post = await r
         .db(DB)
         .table("posts")
@@ -29,6 +35,8 @@ const newComment = async (obj, args, context) => {
         postID: args.postID,
         comment: args.comment,
         userID: userID,
+        userName: user.userName,
+        profilePhoto: user.profilePhoto,
         createdAt: new Date().toISOString(),
         isDeleted: false,
     };
