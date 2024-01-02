@@ -16,6 +16,7 @@ import getOwnPosts from "./queries/getOwnPosts";
 import getLikes from "./queries/getLikes";
 import getLikesCount from "./queries/getLikesCount";
 import getOwnProfile from "./queries/getOwnProfile";
+import getProfile from "./queries/getProfile";
 
 const resolvers = {
     Mutation: {
@@ -35,7 +36,8 @@ const resolvers = {
         getOwnPosts,
         getLikes,
         getLikesCount,
-        getOwnProfile
+        getOwnProfile,
+        getProfile
     }
 };
 export default resolvers;

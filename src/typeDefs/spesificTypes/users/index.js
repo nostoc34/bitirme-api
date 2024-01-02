@@ -16,7 +16,7 @@ const User = `
         code: Int,
         data: User
     },
-    type GetOwnProfile {
+    type GetProfile {
         id: String,
         userName: String,
         fullName: String,
@@ -30,10 +30,10 @@ const User = `
         isActive: Boolean,
         createdAt: String
     },
-    type GetOwnProfileRes {
+    type GetProfileRes {
         message: String,
         code: Int,
-        data: GetOwnProfile
+        data: GetProfile
     }
 `;
 export default User;

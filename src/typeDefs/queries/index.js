@@ -10,6 +10,9 @@ export default `
         getLikesCount(
             postID: String!
         ): GetLikesCountRes,
-        getOwnProfile: GetOwnProfileRes
+        getOwnProfile: GetProfileRes,
+        getProfile(
+            userID: String!
+        ): GetProfileRes
     }
 `;

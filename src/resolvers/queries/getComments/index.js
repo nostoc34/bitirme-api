@@ -13,6 +13,12 @@ const getComments = async (obj, args, context) => {
     const {
         userID
     } = context;
+    
+    const user = await r
+        .db(DB)
+        .table("users")
+        .get(userID)
+        .run();
 
     const post = await r
         .db(DB)
@@ -44,9 +50,9 @@ const getComments = async (obj, args, context) => {
             })
             .run();
 
-        if(!(isFollowingPostUser && isFollowingPostUser.length)) return {
+        if(!(isFollowingPostUser && isFollowingPostUser.length || user.type === "admin")) return {
             message: "Bu gönderi sahibinin profili gizli.",
-            code: 503
+            code: 205
         };
     };
 
