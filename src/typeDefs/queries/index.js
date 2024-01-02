@@ -13,6 +13,7 @@ export default `
         getOwnProfile: GetProfileRes,
         getProfile(
             userID: String!
-        ): GetProfileRes
+        ): GetProfileRes,
+        getPosts: GetPostsRes
     }
 `;
