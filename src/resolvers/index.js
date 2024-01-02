@@ -6,6 +6,7 @@ import deleteComment from "./mutations/deleteComment";
 import deletePost from "./mutations/deletePost";
 import handleFollow from "./mutations/handleFollow";
 import handleFollowRequest from "./mutations/handleFollowRequest";
+import editProfile from "./mutations/editProfile";
 
 const resolvers = {
     Mutation: {
@@ -15,7 +16,8 @@ const resolvers = {
         deleteComment,
         deletePost,
         handleFollow,
-        handleFollowRequest
+        handleFollowRequest,
+        editProfile
     },
     Query: {
     }

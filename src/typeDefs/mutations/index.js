@@ -23,6 +23,13 @@ export default `
         handleFollowRequest(
             followID: String!,
             reqResponse: String!
-        ): Default
+        ): Default,
+        editProfile(
+            userName: String,
+            fullName: String,
+            about: String,
+            isPrivate: Boolean,
+            profilePhoto: Upload
+        ): UserResponse
     }
 `;
