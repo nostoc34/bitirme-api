@@ -3,6 +3,12 @@ export default `
         getComments(
             postID: String!
         ): GetCommentsRes,
-        getOwnPosts: GetOwnPostsRes
+        getOwnPosts: GetOwnPostsRes,
+        getLikes(
+            postID: String!
+        ): GetLikesRes,
+        getLikesCount(
+            postID: String!
+        ): GetLikesCountRes
     }
 `;

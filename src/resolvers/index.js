@@ -13,6 +13,8 @@ import changePassword from "./mutations/changePassword";
 //Queries
 import getComments from "./queries/getComments";
 import getOwnPosts from "./queries/getOwnPosts";
+import getLikes from "./queries/getLikes";
+import getLikesCount from "./queries/getLikesCount";
 
 const resolvers = {
     Mutation: {
@@ -29,7 +31,9 @@ const resolvers = {
     },
     Query: {
         getComments,
-        getOwnPosts
+        getOwnPosts,
+        getLikes,
+        getLikesCount
     }
 };
 export default resolvers;
