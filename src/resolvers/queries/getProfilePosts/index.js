@@ -9,20 +9,37 @@ import {
     asyncForEach
 } from '../../../utils';
 
-const getOwnPosts = async (obj, args, context) => {
+const getProfilePosts = async (obj, args, context) => {
     const {
         userID
     } = context;
+
+    const user = await r
+        .db(DB)
+        .table("users")
+        .get(userID)
+        .run();
+
+    const targetUser = await r
+        .db(DB)
+        .table("users")
+        .filter({
+            userName: args.userName,
+            isActive: true
+        })
+        .run();
+
+    const targetUserID = targetUser[0].id;
 
     const posts = await r
         .db(DB)
         .table("posts")
         .filter({
-            userID: userID,
+            userID: targetUserID,
             isDeleted: false
         })
         .run();
-
+        
     await asyncForEach(posts, async (item, index) => {
         const comments = await r
             .db(DB)
@@ -54,4 +71,4 @@ const getOwnPosts = async (obj, args, context) => {
     };
 };
 
-export default getOwnPosts;
+export default getProfilePosts;

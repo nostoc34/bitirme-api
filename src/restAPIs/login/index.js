@@ -1,6 +1,7 @@
 import {
     DB,
-    JWT_KEY
+    JWT_KEY,
+    SERVER_URL
 } from '../../constants';
 import {
     r
@@ -67,7 +68,7 @@ const login = async (req) => {
                 userID: user.id,
                 fullName: user.fullName,
                 userName: user.userName,
-                //profilePhoto: user.profilePhotoID ? `${SERVER_ADDRESS}/upload/${user.profilePhotoID}.${user.profilePhotoEXT}` : `${SERVER_ADDRESS}/upload/emptyProfile.png`
+                profilePhoto: user.profilePhoto ? user.profilePhoto : `${SERVER_URL}upload/defaultpp.jpg`
             }
         };
     } catch(err) {

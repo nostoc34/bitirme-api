@@ -20,32 +20,17 @@ const getProfile = async (obj, args, context) => {
     const targetUser = await r
         .db(DB)
         .table("users")
-        .get(args.userID)
+        .filter({
+            userName: args.userName,
+            isActive: true
+        })
         .run();
-
-    console.log(targetUser.isPrivate);
-    if(targetUser.isPrivate) {
-        const isUserFollowsTarget = await r
-            .db(DB)
-            .table("followings")
-            .filter({
-                fromUser: userID,
-                toUser: args.userID,
-                status: "approved"
-            })
-            .run();
-        
-        if(!(isUserFollowsTarget && isUserFollowsTarget.length || user.type === "admin")) return {
-            message: "Bu kullanıcının profili gizli.",
-            code: 205
-        };
-    }
 
     const followCount = await r
         .db(DB)
         .table("followings")
         .filter({
-            fromUser: args.userID,
+            fromUser: targetUser[0].id,
             status: "approved"
         })
         .count()
@@ -55,19 +40,64 @@ const getProfile = async (obj, args, context) => {
         .db(DB)
         .table("followings")
         .filter({
-            toUser: args.userID,
+            toUser: targetUser[0].id,
             status: "approved"
         })
         .count()
         .run();
 
-    targetUser.followers = followerCount;
-    targetUser.follows = followCount;
+    targetUser[0].followers = followerCount;
+    targetUser[0].follows = followCount;
+
+    const followStatus = await r
+        .db(DB)
+        .table("followings")
+        .filter({
+            fromUser: userID,
+            toUser: targetUser[0].id
+        })
+        .run();
+
+    if(followStatus && followStatus.length) {
+        targetUser[0].followStatus = followStatus[0].status;
+    }
+
+    const isUserFollowsTarget = await r
+        .db(DB)
+        .table("followings")
+        .filter({
+            fromUser: userID,
+            toUser: targetUser[0].id,
+            status: "approved"
+        })
+        .run();
+
+    if(targetUser[0].isPrivate) {
+        if(user) {        
+            if(!(isUserFollowsTarget && isUserFollowsTarget.length || user.type === "admin")) return {
+                message: "Bu kullanıcının profili gizli.",
+                code: 205,
+                data: targetUser[0]
+            };
+        } else {
+            return {
+                message: "Bu kullanıcının profili gizli. Görmek için giriş yap.",
+                code: 206,
+                data: targetUser[0]
+            };
+        }
+    }
+
+    if(!(isUserFollowsTarget && isUserFollowsTarget.length || user.type === "admin")) return {
+        message: "Profili getirme başarılı.",
+        code: 201,
+        data: targetUser[0]
+    };
 
     return {
         message: "Profili getirme başarılı.",
         code: 200,
-        data: targetUser
+        data: targetUser[0]
     };
 };
 

@@ -11,6 +11,12 @@ const newLike = async (obj, args, context) => {
         userID
     } = context;
 
+    const user = await r
+        .db(DB)
+        .table("users")
+        .get(userID)
+        .run();
+
     const post = await r
         .db(DB)
         .table("posts")
@@ -37,13 +43,24 @@ const newLike = async (obj, args, context) => {
             .table("likes")
             .get(isLiked[0].id)
             .delete()
-            .run();
+            .run()
+            .then(() => {
+                return {
+                    message: "Beğeni başarıyla silindi.",
+                    code: 200,
+                    data: {
+                        
+                    }
+                };
+            });
     } else {
         const likeID = await r.uuid();
         let newLike = {
             id: likeID,
             postID: args.postID,
             userID: userID,
+            userName: user.userName,
+            profilePhoto: user.profilePhoto,
             createdAt: new Date().toISOString(),
         };
     

@@ -4,6 +4,8 @@ const Like = `
         userID: String,
         postID: String,
         createdAt: String,
+        userName: String,
+        profilePhoto: String
     },
     type GetLikes {
         id: String,

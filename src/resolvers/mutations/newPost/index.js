@@ -20,17 +20,10 @@ const newPost = async (obj, args, context) => {
         id: postID,
         userID: userID,
         content: args.content,
-        images: [],
+        image: SERVER_URL + "upload/" + args.image,
         isDeleted: false,
         createdAt: new Date().toISOString(),
     };
-
-    if(args.images) {
-        await asyncForEach(args.images, async (item) => {
-            item = SERVER_URL + "upload/" + item;
-            newPost.images.push(item);
-        });
-    }
 
     return await r
         .db(DB)

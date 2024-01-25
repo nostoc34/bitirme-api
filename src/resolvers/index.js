@@ -14,9 +14,11 @@ import changePassword from "./mutations/changePassword";
 import getOwnPosts from "./queries/getOwnPosts";
 import getLikes from "./queries/getLikes";
 import getLikesCount from "./queries/getLikesCount";
-import getOwnProfile from "./queries/getOwnProfile";
+import getOwnProfileData from "./queries/getOwnProfileData";
 import getProfile from "./queries/getProfile";
 import getPosts from "./queries/getPosts";
+import getPost from "./queries/getPost";
+import getProfilePosts from "./queries/getProfilePosts";
 
 const resolvers = {
     Mutation: {
@@ -35,9 +37,11 @@ const resolvers = {
         getOwnPosts,
         getLikes,
         getLikesCount,
-        getOwnProfile,
+        getOwnProfileData,
         getProfile,
-        getPosts
+        getPosts,
+        getPost,
+        getProfilePosts
     }
 };
 export default resolvers;

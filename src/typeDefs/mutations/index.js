@@ -2,7 +2,7 @@ export default `
     type Mutation {
         newPost(
             content: String,
-            images: [Upload!]
+            image: Upload!
         ): PostResponse,
         newComment(
             comment: String!,

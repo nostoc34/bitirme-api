@@ -6,7 +6,7 @@ import {
     SERVER_URL
 } from '../../../constants';
 
-const getOwnProfile = async (obj, args, context) => {
+const getOwnProfileData = async (obj, args, context) => {
     const {
         userID
     } = context;
@@ -45,6 +45,7 @@ const getOwnProfile = async (obj, args, context) => {
     user.followers = followerCount;
     user.follows = followCount;
 
+    
     return {
         message: "Profili getirme başarılı.",
         code: 200,
@@ -52,4 +53,4 @@ const getOwnProfile = async (obj, args, context) => {
     };
 };
 
-export default getOwnProfile;
+export default getOwnProfileData;

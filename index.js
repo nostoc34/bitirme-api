@@ -37,7 +37,7 @@ app.use(
         if(req.query && req.query.authorization) {
             req.headers.authorization = req.query.authorization;
         }
-    
+
         if(!req.headers || !req.headers.authorization) {
             res.statusCode = 200;
             res.send({
@@ -64,11 +64,13 @@ app.use(
         maxFiles: 64 
     }),
 
-    graphqlHTTP((request, response, graphQLParams) => ({
-        schema: schema,
-        context: request.data,
-        graphiql: true
-    }))
+    graphqlHTTP((request, response, graphQLParams) => {
+        return {
+            schema: schema,
+            context: request.data,
+            graphiql: true
+        };
+    })
 );
 
 
