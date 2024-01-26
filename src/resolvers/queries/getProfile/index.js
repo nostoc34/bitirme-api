@@ -48,6 +48,7 @@ const getProfile = async (obj, args, context) => {
 
     targetUser[0].followers = followerCount;
     targetUser[0].follows = followCount;
+    targetUser[0].profilePhoto =  SERVER_URL + "upload/" + targetUser[0].profilePhoto;
 
     const followStatus = await r
         .db(DB)

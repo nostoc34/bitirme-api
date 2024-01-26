@@ -60,7 +60,7 @@ const newLike = async (obj, args, context) => {
             postID: args.postID,
             userID: userID,
             userName: user.userName,
-            profilePhoto: user.profilePhoto,
+            profilePhoto: SERVER_URL + "upload/" + user.profilePhoto,
             createdAt: new Date().toISOString(),
         };
     

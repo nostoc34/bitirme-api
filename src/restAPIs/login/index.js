@@ -68,7 +68,7 @@ const login = async (req) => {
                 userID: user.id,
                 fullName: user.fullName,
                 userName: user.userName,
-                profilePhoto: user.profilePhoto ? user.profilePhoto : `${SERVER_URL}upload/defaultpp.jpg`
+                profilePhoto: user.profilePhoto ? `${SERVER_URL}upload/${user.profilePhoto}` : `${SERVER_URL}upload/defaultpp.jpg`
             }
         };
     } catch(err) {

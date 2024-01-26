@@ -36,7 +36,7 @@ const newComment = async (obj, args, context) => {
         comment: args.comment,
         userID: userID,
         userName: user.userName,
-        profilePhoto: user.profilePhoto,
+        profilePhoto: SERVER_URL + "upload/" + user.profilePhoto,
         createdAt: new Date().toISOString(),
         isDeleted: false,
     };

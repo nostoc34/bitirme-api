@@ -41,7 +41,9 @@ const Post = `
         userName: String,
         profilePhoto: String,
         comments: [Comment],
-        likes: Int
+        likes: [Like],
+        commentCount: Int,
+        likeCount: Int
     },
     type PostResponse {
         message: String,

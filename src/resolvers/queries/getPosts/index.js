@@ -41,13 +41,14 @@ const getPosts = async (obj, args, context) => {
             })
             .run();
         await asyncForEach(posts, async (item, index) => {
+            item.image = SERVER_URL + "upload/" + item.image;
             const userData = await r
                 .db(DB)
                 .table("users")
                 .get(item.userID)
                 .run();
             item.userName = userData.userName;
-            item.profilePhoto = userData.profilePhoto;
+            item.profilePhoto = SERVER_URL + "upload/" + userData.profilePhoto;
             _posts.push(item);            
         });
         
@@ -63,6 +64,7 @@ const getPosts = async (obj, args, context) => {
             })
             .run();
         item.comments = comments;
+        item.commentCount = comments.length;
     });
 
     await asyncForEach(_posts, async (item, index) => {
@@ -72,9 +74,9 @@ const getPosts = async (obj, args, context) => {
             .filter({
                 postID: item.id,
             })
-            .count()
             .run();
         item.likes = likes;
+        item.likeCount = likes.length;
     });
 
     return {

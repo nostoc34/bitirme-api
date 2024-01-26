@@ -41,7 +41,7 @@ const editProfile = async (obj, args, context) => {
         editedProfile.about = args.about;
     }
 
-    if(args.isPrivate) {
+    if(typeof args.isPrivate !== undefined) {
         editedProfile.isPrivate = args.isPrivate;
     }
 

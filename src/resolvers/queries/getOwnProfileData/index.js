@@ -44,6 +44,7 @@ const getOwnProfileData = async (obj, args, context) => {
 
     user.followers = followerCount;
     user.follows = followCount;
+    user.profilePhoto = SERVER_URL + "upload/" + user.profilePhoto; 
 
     
     return {

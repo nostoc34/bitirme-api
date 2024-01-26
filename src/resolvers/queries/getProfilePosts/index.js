@@ -39,8 +39,10 @@ const getProfilePosts = async (obj, args, context) => {
             isDeleted: false
         })
         .run();
+    
         
     await asyncForEach(posts, async (item, index) => {
+        item.image = SERVER_URL + "upload/" + item.image;
         const comments = await r
             .db(DB)
             .table("comments")

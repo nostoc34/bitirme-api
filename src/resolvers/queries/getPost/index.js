@@ -26,6 +26,8 @@ const getPost = async (obj, args, context) => {
         .get(args.postID)
         .run();
 
+    post.image = SERVER_URL + "upload/" + post.image;
+
     const comments = await r
         .db(DB)
         .table("comments")
