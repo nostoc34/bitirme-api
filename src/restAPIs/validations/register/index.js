@@ -25,14 +25,14 @@ export const userName = (field) => {
         };
     }
 
-    const isUserName = USER_NAME_REGEX.test(field.trim());
+    // const isUserName = USER_NAME_REGEX.test(field.trim());
 
-    if(!isUserName) {
-        return {
-            message: "Kullanıcı adı geçersiz.",
-            status: false
-        };
-    }
+    // if(!isUserName) {
+    //     return {
+    //         message: "Kullanıcı adı geçersiz.",
+    //         status: false
+    //     };
+    // }
 
     return {
         status: true

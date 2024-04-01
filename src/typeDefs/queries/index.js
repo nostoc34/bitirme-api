@@ -17,6 +17,10 @@ export default `
         ): GetPostResp,
         getProfilePosts(
             userName: String!
-        ): GetOwnPostsRes
+        ): GetOwnPostsRes,
+        search(
+            searchText: String
+        ): SearchResponse,
+        getFriendSuggestions: Default
     }
 `;

@@ -19,6 +19,8 @@ import getProfile from "./queries/getProfile";
 import getPosts from "./queries/getPosts";
 import getPost from "./queries/getPost";
 import getProfilePosts from "./queries/getProfilePosts";
+import search from "./queries/search";
+import getFriendSuggestions from "./queries/getFriendSuggestions";
 
 const resolvers = {
     Mutation: {
@@ -41,7 +43,9 @@ const resolvers = {
         getProfile,
         getPosts,
         getPost,
-        getProfilePosts
+        getProfilePosts,
+        search,
+        getFriendSuggestions
     }
 };
 export default resolvers;

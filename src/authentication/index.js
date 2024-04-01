@@ -14,7 +14,7 @@ const getAuthStatus = ({
         try {
             if(token === "3e7c577d-efe5-4ad1-bff9-056e84aaa107") {
                 return resolve({
-                    userID: "1534-486s-12s5"
+                    userID: "1534-486s-12s5"//"aas8-2s15-5ax4"
                 });
             }
 

@@ -7,10 +7,12 @@ import Post from "./spesificTypes/posts";
 import Comment from "./spesificTypes/comments";
 import Like from "./spesificTypes/likes";
 import Follow from "./spesificTypes/follows";
+import Search from "./spesificTypes/search";
 
 export default `
     scalar Upload,
     
+    ${Search},
     ${Follow},
     ${Like},
     ${Comment},
@@ -20,5 +22,3 @@ export default `
     ${mutations},
     ${queries}
 `;
-
-// ${Default},

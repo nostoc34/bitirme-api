@@ -58,7 +58,8 @@ const getProfile = async (obj, args, context) => {
             toUser: targetUser[0].id
         })
         .run();
-
+    console.log(targetUser[0]);
+    console.log(followStatus);
     if(followStatus && followStatus.length) {
         targetUser[0].followStatus = followStatus[0].status;
     }
@@ -75,10 +76,12 @@ const getProfile = async (obj, args, context) => {
 
     if(targetUser[0].isPrivate) {
         if(user) {        
-            if(!(isUserFollowsTarget && isUserFollowsTarget.length || user.type === "admin")) return {
-                message: "Bu kullanıcının profili gizli.",
-                code: 205,
-                data: targetUser[0]
+            if(!(isUserFollowsTarget && isUserFollowsTarget.length || user.type === "admin")) {
+                return {
+                    message: "Bu kullanıcının profili gizli.",
+                    code: 205,
+                    data: targetUser[0]
+                };
             };
         } else {
             return {
@@ -89,10 +92,12 @@ const getProfile = async (obj, args, context) => {
         }
     }
 
-    if(!(isUserFollowsTarget && isUserFollowsTarget.length || user.type === "admin")) return {
-        message: "Profili getirme başarılı.",
-        code: 201,
-        data: targetUser[0]
+    if(!(isUserFollowsTarget && isUserFollowsTarget.length || user.type === "admin")) {
+        return {
+            message: "Profili getirme başarılı.",
+            code: 201,
+            data: targetUser[0]
+        };
     };
 
     return {
