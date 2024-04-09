@@ -21,6 +21,6 @@ export default `
         search(
             searchText: String
         ): SearchResponse,
-        getFriendSuggestions: Default
+        getFriendSuggestions: FriendSuggestionRes
     }
 `;

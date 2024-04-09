@@ -62,6 +62,7 @@ const getPosts = async (obj, args, context) => {
                 postID: item.id,
                 isDeleted: false
             })
+            .orderBy("createdAt")
             .run();
         item.comments = comments;
         item.commentCount = comments.length;
@@ -78,6 +79,8 @@ const getPosts = async (obj, args, context) => {
         item.likes = likes;
         item.likeCount = likes.length;
     });
+
+    _posts = _posts.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
 
     return {
         message: "Gönderiler başarıyla getirildi.",

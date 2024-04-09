@@ -26,10 +26,14 @@ const getFriendSuggestions = async (obj, args, context) => {
         .db(DB)
         .table("followings")
         .filter({
-            fromUser: userID
+            fromUser: userID,
+            status: "approved"
         })
         .pluck("toUser")
         .run();
+
+    let ff1 = [];
+    let ff2 = [];
 
     await asyncForEach(follows, async (item) => {
         const _followFollows = await r
@@ -40,36 +44,68 @@ const getFriendSuggestions = async (obj, args, context) => {
             })
             .pluck("toUser")
             .run();
+        _followFollows.forEach((item) => ff1.push(item));
+    });
 
-        const followFollows = _followFollows.filter((item) => !follows.includes(item));
+    ff1.forEach((item) => {
+        if(ff2.findIndex(e => e.toUser === item.toUser) === -1) {
+            ff2.push(item);
+        }
+    });
 
-        await asyncForEach(followFollows, async (c_item) => {
-            list.push({
-                user: c_item.toUser,
-                point: 10
-            });
+    let followFollows = [];
 
-            const _followFollowFollows = await r
-                .db(DB)
-                .table("followings")
-                .filter(function(flw) {
-                    return flw("fromUser").eq(c_item.toUser).and(flw("toUser").eq(userID).not());
-                })
-                .pluck("toUser")
-                .run();
+    ff2.forEach((item) => {
+        if(follows.findIndex(e => e.toUser === item.toUser) === -1) {
+            followFollows.push(item);
+        }
+    });
 
-            const followFollowFollows = _followFollowFollows.filter(x => !followFollows.includes(x));
+    let fff1 = [];
+    let fff2 = [];
+
+    await asyncForEach(followFollows, async (c_item) => {
+        list.push({
+            user: c_item.toUser,
+            point: 10
+        });
+
+        const _followFollowFollows = await r
+            .db(DB)
+            .table("followings")
+            .filter(function(flw) {
+                return flw("fromUser").eq(c_item.toUser).and(flw("toUser").eq(userID).not());
+            })
+            .pluck("toUser")
+            .run();
             
-            await asyncForEach(followFollowFollows, async (cc_item) => {
-                list.push({
-                    user: cc_item.toUser,
-                    point: 5
-                });
-            });
+        _followFollowFollows.forEach((item) => fff1.push(item));
+    });
+
+    console.log("List-1: ", list);
+
+    fff1.forEach((item) => {
+        if(fff2.findIndex(e => e.toUser === item.toUser) === -1) {
+            fff2.push(item);
+        }
+    });
+
+    let followFollowFollows = [];
+
+    fff2.forEach((item) => {
+        if(followFollows.findIndex(e => e.toUser === item.toUser) === -1) {
+            followFollowFollows.push(item);
+        }
+    });
+        
+    await asyncForEach(followFollowFollows, async (cc_item) => {
+        list.push({
+            user: cc_item.toUser,
+            point: 5
         });
     });
-    
-    console.log("list 1: ", list);
+
+    console.log("List-2: ", list);
 
     const myLikes = await r
         .db(DB)
@@ -106,7 +142,7 @@ const getFriendSuggestions = async (obj, args, context) => {
         });
     });
 
-    console.log("list 2: ", list);
+    console.log("List-3 (Likes): ", list);
 
     const myComments = await r
         .db(DB)
@@ -144,14 +180,29 @@ const getFriendSuggestions = async (obj, args, context) => {
         });
     });
 
-    console.log("list: ", list);
+    console.log("List-4 (Comments): ", list);
 
     list = list.sort((a, b) => b.point - a.point);
-    console.log("sort list: ", list); 
+
+    console.log("Sorted List: ", list);
+
+    let response = [];
+
+    await asyncForEach(list, async (item) => {
+        let target = await r
+            .db(DB)
+            .table("users")
+            .get(item.user)
+            .run();
+
+        target.profilePhoto = SERVER_URL + "upload/" + target.profilePhoto;
+        response.push(target);
+    });
 
     return {
-        message: "Geldi",
-        code: 200
+        message: "Önerilen arkdaşlar başarıyla getirildi.",
+        code: 200,
+        data: response
     };
 };
 

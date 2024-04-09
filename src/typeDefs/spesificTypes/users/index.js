@@ -54,6 +54,11 @@ const User = `
         message: String,
         code: Int,
         data: GetOwnProfile
+    },
+    type FriendSuggestionRes {
+        message: String,
+        code: Int,
+        data: [User]
     }
 `;
 export default User;

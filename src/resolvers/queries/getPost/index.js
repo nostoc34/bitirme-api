@@ -35,6 +35,7 @@ const getPost = async (obj, args, context) => {
             postID: args.postID,
             isDeleted: false
         })
+        .orderBy("createdAt")
         .run();
     const commentCount = comments.length;
     post.comments = comments;

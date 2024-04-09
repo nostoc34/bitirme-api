@@ -50,7 +50,7 @@ const register = async (req, res) => {
             fullName: reqBody.fullName.trim(),
             email: reqBody.email.trim(),
             password: reqBody.password.trim(),
-            profilePhoto: `${SERVER_URL}upload/defaultpp.jpg`,
+            profilePhoto: `defaultpp.jpg`,
             type: "user",
             isPrivate: false,
             createdAt: new Date().toISOString(),
