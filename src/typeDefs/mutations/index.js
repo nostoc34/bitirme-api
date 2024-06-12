@@ -39,6 +39,13 @@ export default `
             oldPassword: String!,
             newPassword: String!,
             newPasswordRe: String!
-        ): Default
+        ): Default,
+        sendMessage(
+            conversationID: String!,
+            message: String!
+        ): SendMessageResponse,
+        newConversation(
+            targetID: String!
+        ): NewConversationResponse
     }
 `;

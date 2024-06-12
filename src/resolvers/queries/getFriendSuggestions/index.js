@@ -82,8 +82,6 @@ const getFriendSuggestions = async (obj, args, context) => {
         _followFollowFollows.forEach((item) => fff1.push(item));
     });
 
-    console.log("List-1: ", list);
-
     fff1.forEach((item) => {
         if(fff2.findIndex(e => e.toUser === item.toUser) === -1) {
             fff2.push(item);
@@ -104,8 +102,6 @@ const getFriendSuggestions = async (obj, args, context) => {
             point: 5
         });
     });
-
-    console.log("List-2: ", list);
 
     const myLikes = await r
         .db(DB)
@@ -141,8 +137,6 @@ const getFriendSuggestions = async (obj, args, context) => {
             }
         });
     });
-
-    console.log("List-3 (Likes): ", list);
 
     const myComments = await r
         .db(DB)
@@ -180,11 +174,7 @@ const getFriendSuggestions = async (obj, args, context) => {
         });
     });
 
-    console.log("List-4 (Comments): ", list);
-
     list = list.sort((a, b) => b.point - a.point);
-
-    console.log("Sorted List: ", list);
 
     let response = [];
 
@@ -198,6 +188,8 @@ const getFriendSuggestions = async (obj, args, context) => {
         target.profilePhoto = SERVER_URL + "upload/" + target.profilePhoto;
         response.push(target);
     });
+
+    response = response.slice(0,5); 
 
     return {
         message: "Önerilen arkdaşlar başarıyla getirildi.",
