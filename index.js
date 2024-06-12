@@ -1,11 +1,5 @@
 require('dotenv').config();
 import express from 'express';
-import {
-    DB
-} from './src/constants';
-import {
-    r
-} from './src/database';
 import bodyParser from 'body-parser';
 import cors from 'cors';
 import getAuthStatus from './src/authentication';
@@ -16,6 +10,19 @@ import {
     graphqlUploadExpress
 } from 'graphql-upload';
 import schema from './src';
+import {
+    r
+} from "./src/database";
+import {
+    DB
+} from "./src/constants";
+
+import {
+    Server
+} from "socket.io";
+import {
+    createServer
+} from "node:http";
 
 //RestAPI Endpoints
 import register from './src/restAPIs/register';
@@ -24,11 +31,37 @@ import login from './src/restAPIs/login';
 var app = express();
 app.use(cors());
 
+const ioApp = express();
+const server = createServer(ioApp);
+const io = new Server(server, {
+    cors: "http:localhost:3000"
+});
+
+io.on("connection", (socket) => {
+    console.log("A user connected.");
+
+    if(!socket.handshake.headers.authorization) {
+        socket.client._disconnect();
+    }
+
+    socket.data.user = socket.handshake.headers.authorization;
+    console.log("hey",socket.data.user);
+    socket.join(socket.handshake.headers.authorization);
+
+    socket.on("send-message", (messagePayload) => {
+        console.log("send", messagePayload);
+        messagePayload.users.forEach((item) => {
+            if(item !== socket.data.user) {
+                socket.to(item).emit("message-received", messagePayload);
+            }
+        });
+    });
+});
+
 const urlEncoded = bodyParser.urlencoded({
     extended: true
 });
 const jsonParser = bodyParser.json();
-
 
 app.use("/upload", express.static(__dirname + '/upload'));
 
@@ -89,4 +122,5 @@ app.post("/login", jsonParser, async (req, res) => {
 });
 
 app.listen(4000);
+io.listen(4001);
 console.log("Running a GraphQL API server at http://localhost:4000/graphql");

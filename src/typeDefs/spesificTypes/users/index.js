@@ -11,6 +11,12 @@ const User = `
         isActive: Boolean,
         createdAt: String
     },
+    type GetFollowings {
+        userID: String,
+        userName: String,
+        fullName: String,
+        profilePhoto: String
+    }
     type UserResponse {
         message: String,
         code: Int,
@@ -54,6 +60,16 @@ const User = `
         message: String,
         code: Int,
         data: GetOwnProfile
+    },
+    type FriendSuggestionRes {
+        message: String,
+        code: Int,
+        data: [User]
+    },
+    type GetFollowingsResponse {
+        message: String,
+        code: Int,
+        data: [GetFollowings]
     }
 `;
 export default User;

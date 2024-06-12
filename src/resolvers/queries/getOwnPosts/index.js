@@ -21,6 +21,7 @@ const getOwnPosts = async (obj, args, context) => {
             userID: userID,
             isDeleted: false
         })
+        .orderBy(r.desc("createdAt"))
         .run();
 
     await asyncForEach(posts, async (item, index) => {
@@ -35,6 +36,7 @@ const getOwnPosts = async (obj, args, context) => {
                 postID: item.id,
                 isDeleted: false
             })
+            .orderBy("createdAt")
             .run();
         item.comments = comments;
     });

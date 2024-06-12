@@ -8,10 +8,12 @@ import Comment from "./spesificTypes/comments";
 import Like from "./spesificTypes/likes";
 import Follow from "./spesificTypes/follows";
 import Search from "./spesificTypes/search";
+import Message from "./spesificTypes/messages";
 
 export default `
     scalar Upload,
     
+    ${Message},
     ${Search},
     ${Follow},
     ${Like},

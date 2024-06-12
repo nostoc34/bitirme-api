@@ -21,6 +21,11 @@ export default `
         search(
             searchText: String
         ): SearchResponse,
-        getFriendSuggestions: Default
+        getFriendSuggestions: FriendSuggestionRes,
+        getMessages(
+            conversationID: String!
+        ): GetMessagesResponse,
+        getConversations: GetConversationsResponse,
+        getFollowings: GetFollowingsResponse
     }
 `;

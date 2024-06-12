@@ -9,6 +9,8 @@ import handleFollowRequest from "./mutations/handleFollowRequest";
 import editProfile from "./mutations/editProfile";
 import changeEmail from "./mutations/changeEmail";
 import changePassword from "./mutations/changePassword";
+import sendMessage from "./mutations/sendMessage";
+import newConversation from "./mutations/newConversation";
 
 //Queries
 import getOwnPosts from "./queries/getOwnPosts";
@@ -21,6 +23,9 @@ import getPost from "./queries/getPost";
 import getProfilePosts from "./queries/getProfilePosts";
 import search from "./queries/search";
 import getFriendSuggestions from "./queries/getFriendSuggestions";
+import getMessages from "./queries/getMessages";
+import getConversations from "./queries/getConversations";
+import getFollowings from "./queries/getFollowings";
 
 const resolvers = {
     Mutation: {
@@ -33,7 +38,9 @@ const resolvers = {
         handleFollowRequest,
         editProfile,
         changeEmail,
-        changePassword
+        changePassword,
+        sendMessage,
+        newConversation
     },
     Query: {
         getOwnPosts,
@@ -45,7 +52,10 @@ const resolvers = {
         getPost,
         getProfilePosts,
         search,
-        getFriendSuggestions
+        getFriendSuggestions,
+        getMessages,
+        getConversations,
+        getFollowings
     }
 };
 export default resolvers;
